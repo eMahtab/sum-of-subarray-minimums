@@ -15,6 +15,16 @@ Minimums are 3, 1, 2, 4, 1, 1, 2, 1, 1, 1.
 Sum is 17.
 ```
 
+### Naive approach : Sum the min of each subarray.
+```
+Input: arr = [3,1,2,4]
+Subarrays of [3,1,2,4] will be :
+[3] , [3,1] , [3,1,2] , [3,1,2,4]
+[1] , [1,2] , [1,2,4]
+[2] , [2,4]
+[4]
+```
+
 # Implementation 1 : Overflow issue
 ```java
 class Solution {
