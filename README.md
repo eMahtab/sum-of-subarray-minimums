@@ -101,3 +101,33 @@ class Solution {
     }
 }
 ```
+
+## Improvement : No need to create subarrays, just calculate min of subarray (Time Limit Exceeded)
+```java
+class Solution {
+    public int sumSubarrayMins(int[] arr) {
+        if(arr == null || arr.length == 0)
+            return 0;
+        
+        int sum = 0;
+        int mod = (int) 1e9 + 7;
+        for(int i = 0; i < arr.length; i++) {
+            for(int j = i; j < arr.length; j++) {
+                int min = subarrayMin(arr, i, j);
+                min = min % mod;
+                sum += min;
+                sum = sum % mod;
+            }
+        }
+        return sum;
+    }
+    
+    private int subarrayMin(int[] arr, int start, int end) {
+        int min = arr[start];
+        for(int i = start+1; i <= end; i++) {
+            min = Math.min(min,arr[i]);
+        }
+        return min;
+    }
+}
+```
