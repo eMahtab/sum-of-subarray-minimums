@@ -131,3 +131,52 @@ class Solution {
     }
 }
 ```
+
+# Implementation :
+```java
+class Solution {
+    class Pair{
+        int number;
+        int count;
+        Pair(int number, int count) {
+            this.number = number;
+            this.count = count;
+        }
+    }
+    public int sumSubarrayMins(int[] arr) {
+        int minSum = 0;
+        int mod = (int) 1e9 + 7;
+        int n = arr.length;
+        int[] left = new int[n];
+        int[] right = new int[n];
+        Stack<Pair> stack1 = new Stack<>();
+        Stack<Pair> stack2 = new Stack<>();
+        
+        for(int i = 0; i < arr.length; i++) {
+            int count = 1;
+            while(!stack1.isEmpty() && arr[i] < stack1.peek().number) {
+                count += stack1.peek().count;
+                stack1.pop();
+            }
+            stack1.push(new Pair(arr[i], count));
+            left[i] = count;
+        }
+        for(int i = n - 1; i >= 0; i--) {
+            int count = 1;
+            while(!stack2.isEmpty() && arr[i] <= stack2.peek().number) {
+                count += stack2.peek().count;
+                stack2.pop();
+            }
+            stack2.push(new Pair(arr[i], count));
+            right[i] = count;
+        }
+        for(int i = 0; i < n; i++) {
+            minSum = (minSum + arr[i]*left[i]*right[i]) % mod;
+        }
+        return minSum;
+    }
+}
+```
+
+# References :
+https://www.youtube.com/watch?v=Ulb3ixSpE4Y
